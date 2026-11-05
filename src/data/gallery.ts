@@ -12,8 +12,13 @@ import food from "@/assets/story-food.jpg";
 import kitchen from "@/assets/gallery-kitchen.jpg";
 import whole from "@/assets/gallery-whole-spices.jpg";
 import texture from "@/assets/texture-spice-dark.jpg";
+import img1 from "@/assets/image1.jpeg";
+import img2 from "@/assets/image2.jpeg";
+import img3 from "@/assets/image3.jpeg";
+import img4 from "@/assets/image4.jpeg";
+import img5 from "@/assets/image5.jpeg";
 
-export type GalleryCategory = "products" | "packaging" | "brand" | "food";
+export type GalleryCategory = "products" | "packaging" | "brand" | "food" | "moments";
 
 export type GalleryItem = {
   id: string;
@@ -25,6 +30,7 @@ export type GalleryItem = {
 
 export const galleryCategories: { id: GalleryCategory | "all"; label: string }[] = [
   { id: "all", label: "All Photos" },
+  { id: "moments", label: "City King Moments" },
   { id: "packaging", label: "Official Packaging" },
   { id: "products", label: "Spices & Teas" },
   { id: "brand", label: "Brand Heritage" },
@@ -32,6 +38,11 @@ export const galleryCategories: { id: GalleryCategory | "all"; label: string }[]
 ];
 
 export const galleryItems: GalleryItem[] = [
+  { id: "g-img1", src: img1, alt: "City King Spices – Real Moments from Our Journey", category: "moments" },
+  { id: "g-img2", src: img2, alt: "City King Masala – Pure Quality at Every Step", category: "moments" },
+  { id: "g-img3", src: img3, alt: "City King Products – Trusted by Families Across North Bihar", category: "moments" },
+  { id: "g-img4", src: img4, alt: "City King – Flavours that Bring India to Your Kitchen", category: "moments" },
+  { id: "g-img5", src: img5, alt: "City King Chai & Masala – A Taste of Siliguri's Finest", category: "moments" },
   { id: "g1", src: haldi, alt: "City King Turmeric (Haldi) Powder Official Sealed Pouch", category: "packaging" },
   { id: "g2", src: mirchi, alt: "City King Mirchi (Chilli) Powder Official Retail Pouch", category: "packaging" },
   { id: "g3", src: dhaniya, alt: "City King Dhaniya (Coriander) Powder Official Pouch", category: "packaging" },

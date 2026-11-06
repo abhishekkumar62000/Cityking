@@ -257,8 +257,7 @@ export function HeroBannerSlider() {
                     isActive ? "scale-100 sm:scale-[1.015]" : "scale-105",
                   )}
                   loading={idx === 0 ? "eager" : "lazy"}
-                  // @ts-expect-error fetchpriority attribute
-                  fetchpriority={idx === 0 ? "high" : "auto"}
+                  fetchPriority={idx === 0 ? "high" : "auto"}
                 />
 
                 {/* Bottom Overlay Text Caption (Bilingual & Subtle) */}

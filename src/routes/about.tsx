@@ -16,27 +16,33 @@ import storyFood from "@/assets/story-food.jpg";
 import kitchenImg from "@/assets/gallery-kitchen.jpg";
 import wholeSpices from "@/assets/gallery-whole-spices.jpg";
 import citykingLogo from "@/assets/Cityking Logo.png";
+import founderImg from "@/assets/City King Founder.png";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us | Sah Food Industries & City King Spices | Siliguri" },
+      { title: "About Us | Mukesh Kumar Sah & Sah Food Industries | City King Spices Siliguri" },
       {
         name: "description",
         content:
-          "Learn about Sah Food Industries, founded by Mukesh Kumar Sah in Siliguri, Darjeeling. Dedicated to 100% pure, unadulterated cold-ground spices and traditional aroma.",
+          "Discover Sah Food Industries, founded by Mukesh Kumar Sah (Founder & Owner) at Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling (WB – 734001). Dedicated to 100% pure cold-ground spices, everyday blended masalas, and authentic CTC tea.",
       },
       {
         name: "keywords",
         content:
-          "About City King Spices, Sah Food Industries Siliguri, Mukesh Kumar Sah, Darjeeling Spice Factory, Cold Ground Masala Story, Laye Swad me Bahar",
+          "About City King Spices, Sah Food Industries Siliguri, Mukesh Kumar Sah, Mukesh kr Sah, Founder City King, Darjeeling Spice Factory, Jalpaiguri Masala Manufacturer, Ektiasal Eastern Bypass Road, Cold Ground Masala Story, Laye Swad me Bahar, cityking.in",
       },
-      { property: "og:title", content: "About Us | Sah Food Industries & City King Spices" },
+      { property: "og:title", content: "About Sah Food Industries & Founder Mukesh Kumar Sah | City King Spices" },
       {
         property: "og:description",
-        content: "The authentic story of Sah Food Industries and pure City King spices.",
+        content: "The authentic story of Sah Food Industries, founded by Mukesh Kumar Sah in Siliguri. 100% pure spices and tea.",
       },
       { property: "og:url", content: "https://citykingspices.in/about" },
+      { property: "og:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "About City King Spices | Sah Food Industries" },
+      { name: "twitter:description", content: "Founded by Mukesh Kumar Sah in Siliguri, West Bengal. 100% pure cold-ground spices." },
+      { name: "twitter:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
     ],
     links: [{ rel: "canonical", href: "https://citykingspices.in/about" }],
   }),
@@ -111,19 +117,36 @@ function AboutPage() {
 
             <div className="lg:col-span-6">
               <Reveal delay={200}>
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-border">
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-accent/40 bg-card group">
                   <img
-                    src={storyFood}
-                    alt="Traditional Indian Spice Preparation"
-                    className="w-full h-[450px] object-cover"
+                    src={founderImg}
+                    alt="Mukesh Kumar Sah - Founder & Owner of City King Masala Company (Sah Food Industries Siliguri)"
+                    className="w-full h-[480px] object-cover object-top group-hover:scale-102 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cocoa/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6 text-cocoa-foreground">
-                    <div className="flex items-center gap-2 text-accent text-sm font-semibold">
-                      <MapPin className="size-4" />
-                      <span>{site.addressLine}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-cocoa/95 via-cocoa/30 to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6 text-cocoa-foreground space-y-2">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/25 border border-accent/40 text-accent text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                      <Sparkles className="size-3.5" />
+                      <span>Founder &amp; Owner</span>
                     </div>
-                    <h3 className="font-display text-xl font-bold mt-1">Heart of North Bengal</h3>
+                    <h3 className="font-display text-2xl font-bold text-white tracking-wide">
+                      {site.owner}
+                    </h3>
+                    <p className="text-cocoa-foreground/90 text-xs sm:text-sm font-medium">
+                      Sah Food Industries • City King Masala Company
+                    </p>
+                    <div className="flex items-center gap-2 text-accent text-xs pt-1">
+                      <MapPin className="size-3.5 shrink-0" />
+                      <span className="line-clamp-1">{site.addressLine}</span>
+                    </div>
+                    <div className="pt-2">
+                      <Link
+                        to="/contact"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-white transition-colors underline underline-offset-4"
+                      >
+                        Read Founder's Full Personal Message &amp; Vision →
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </Reveal>

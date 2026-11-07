@@ -26,24 +26,29 @@ import founderImg from "@/assets/City King Founder.png";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Us & Founder's Message | Sah Food Industries | City King Spices Siliguri" },
+      { title: "Contact Us & Founder Mukesh Kumar Sah | Sah Food Industries | City King Spices Siliguri" },
       {
         name: "description",
         content:
-          "Contact Sah Food Industries (City King Spices). Address: Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling – Pin 734001, West Bengal. Phone: +91 98326 53731, +91 98004 92817. Read Founder Mukesh Kumar Sah's vision and message.",
+          "Contact Sah Food Industries (City King Spices, cityking.in). Address: Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling – Pin 734001, West Bengal. Phone: +91 98326 53731, +91 98004 92817. Read Founder Mukesh Kumar Sah's personal vision, mission and message for customers.",
       },
       {
         name: "keywords",
         content:
-          "Contact City King Spices, Sah Food Industries Siliguri Phone Number, Mukesh Kumar Sah, Ektiasal Eastern Bypass Road, Jalpaiguri Darjeeling Spices Factory, Founder Message",
+          "Contact City King Spices, Sah Food Industries Siliguri Phone Number, Mukesh Kumar Sah Contact, Ektiasal Eastern Bypass Road Siliguri, Jalpaiguri Darjeeling Spices Factory Address, Founder Mukesh Kumar Sah Message, City King Masala Dealership Enquiry, cityking.in contact",
       },
-      { property: "og:title", content: "Contact Sah Food Industries | City King Spices" },
+      { property: "og:title", content: "Contact Founder Mukesh Kumar Sah | Sah Food Industries | City King Spices" },
       {
         property: "og:description",
         content:
-          "Get in touch with Sah Food Industries, Siliguri. Read Founder Mukesh Kumar Sah's message on spice purity, vision, and dealership opportunities.",
+          "Get in touch with Sah Food Industries, Siliguri. Read Founder Mukesh Kumar Sah's personal message on spice purity, vision, and dealership opportunities.",
       },
       { property: "og:url", content: "https://citykingspices.in/contact" },
+      { property: "og:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Contact & Founder's Message | City King Spices" },
+      { name: "twitter:description", content: "Mukesh Kumar Sah, Founder of City King Masala Company, Sah Food Industries, Siliguri." },
+      { name: "twitter:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
     ],
     links: [{ rel: "canonical", href: "https://citykingspices.in/contact" }],
   }),

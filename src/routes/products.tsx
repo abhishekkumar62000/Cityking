@@ -22,23 +22,30 @@ import heroImg from "@/assets/texture-spice-dark.jpg";
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Products & Spices Catalog | City King Spices | Sah Food Industries" },
+      { title: "Products & Masala Catalog | City King Spices | Sah Food Industries Siliguri | cityking.in" },
       {
         name: "description",
         content:
-          "Explore genuine spices, blended masalas and premium CTC tea by City King. Cold-ground Haldi, Mirchi, Dhaniya, Jeera, Kadai Paneer, Sabji Masala direct from Siliguri.",
+          "Shop City King Spices complete masala catalog by Sah Food Industries (cityking.in). 100% pure cold-ground Haldi Powder, Mirchi Powder, Dhaniya Powder, Jeera Powder, Sabji Masala, Chicken Masala, Meat Masala, Fish Curry Masala, Garam Masala, Kitchen King Masala, Biryani Masala and premium CTC Chai Patti — direct from Ektiasal Eastern Bypass Road, Siliguri, Jalpaiguri, West Bengal.",
       },
       {
         name: "keywords",
         content:
-          "City King Products, Haldi Powder, Mirchi Powder, Dhaniya Powder, Jeera Powder, Sabji Masala, Kadai Paneer Masala, CTC Chai Patti, Siliguri Spices Catalog",
+          "City King Products, Haldi Powder Siliguri, Mirchi Powder Siliguri, Dhaniya Powder, Jeera Powder, Sabji Masala, Chicken Masala, Meat Masala, Fish Curry Masala, Garam Masala, Kitchen King Masala, Biryani Masala, Kashmiri Mirch Powder, Paneer Masala, CTC Chai Patti, Spices Catalog Siliguri, Mukesh Masale, City King Masala Online, Sah Food Industries Products, cityking.in products",
       },
-      { property: "og:title", content: "Products & Spices Catalog | City King Spices" },
+      { property: "og:title", content: "Products & Masala Catalog | City King Spices (cityking.in)" },
       {
         property: "og:description",
-        content: "Authentic, cold-processed pure Indian spices and CTC tea by Sah Food Industries, Siliguri.",
+        content:
+          "Complete catalog of City King pure spices, blended masalas and CTC tea manufactured by Sah Food Industries, Siliguri, West Bengal.",
       },
       { property: "og:url", content: "https://citykingspices.in/products" },
+      { property: "og:image", content: "https://citykingspices.in/Cityking%20Haldi%20Powder%20Masala.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "City King Spices Products — Sah Food Industries Siliguri" },
+      { name: "twitter:description", content: "100% pure cold-ground spices, masalas and CTC tea direct from Siliguri." },
+      { name: "twitter:image", content: "https://citykingspices.in/Cityking%20Haldi%20Powder%20Masala.png" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
     links: [{ rel: "canonical", href: "https://citykingspices.in/products" }],
   }),

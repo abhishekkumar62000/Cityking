@@ -24,24 +24,30 @@ import heroImg from "@/assets/hero-spices.jpg";
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Photo Gallery & Product Range | City King Spices" },
+      { title: "City King Masala Gallery — 33+ Product Photos | Sah Food Industries Siliguri | cityking.in" },
       {
         name: "description",
         content:
-          "Explore City King Spices complete visual gallery: 33+ authentic masala pouches and boxes, premium whole spices, modern packaging, and company journey from Sah Food Industries, Siliguri.",
+          "Official photo gallery of City King Spices (cityking.in / citykingspices.in): 33+ authentic masala pouches, packaging boxes (Haldi, Mirchi, Dhaniya, Jeera, Chicken, Meat, Garam, Biryani, Fish Masala), premium CTC tea, and company journey moments from Sah Food Industries, Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling.",
       },
       {
         name: "keywords",
         content:
-          "City King Gallery, City King Masala Range, Spices Pouches, Chicken Masala, Meat Masala, Garam Masala, Haldi Mirchi Dhania, Sah Food Industries Siliguri",
+          "City King Gallery, City King Masala Photos, City King Spices Packaging, Chicken Masala Pouch, Meat Masala Pouch, Garam Masala Pouch, Biryani Masala Pack, Fish Curry Masala, Kitchen King Masala, Kashmiri Mirch Powder, Haldi Mirchi Dhania Jeera Pouch, Mukesh Masale Photos, Sah Food Industries Siliguri Gallery, cityking.in gallery, citykingspices.in photos, Mukesh Kumar Sah Company Photos",
       },
-      { property: "og:title", content: "Visual Gallery & Product Range | City King Spices" },
+      { property: "og:title", content: "City King Masala Official Gallery — Sah Food Industries Siliguri" },
       {
         property: "og:description",
         content:
-          "Explore all City King spices packaging pouches, boxes, whole spices, and authentic company moments.",
+          "33+ official photos of City King spices packaging pouches, boxes, whole spices, and company journey moments from Sah Food Industries Siliguri.",
       },
       { property: "og:url", content: "https://citykingspices.in/gallery" },
+      { property: "og:image", content: "https://citykingspices.in/new-gallery/IMG-20261105-WA0000.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "City King Masala Gallery | Sah Food Industries Siliguri" },
+      { name: "twitter:description", content: "33+ official product packaging photos from City King Spices, Siliguri." },
+      { name: "twitter:image", content: "https://citykingspices.in/new-gallery/IMG-20261105-WA0000.jpg" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
     links: [{ rel: "canonical", href: "https://citykingspices.in/gallery" }],
   }),
@@ -188,9 +194,9 @@ function GalleryPage() {
 
             {/* True Responsive Masonry Grid */}
             {filteredItems.length > 0 ? (
-              <div className="masonry-grid">
+              <div className="masonry-grid" itemScope itemType="https://schema.org/ImageGallery">
                 {filteredItems.map((item, idx) => (
-                  <div key={item.id} className="masonry-item">
+                  <div key={item.id} className="masonry-item" itemScope itemType="https://schema.org/ImageObject">
                     <Reveal delay={Math.min(idx * 20, 200)}>
                       <div
                         onClick={() => setSelectedIndex(idx)}
@@ -199,9 +205,14 @@ function GalleryPage() {
                         <img
                           src={item.src}
                           alt={item.alt}
+                          title={item.alt}
                           className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
+                          loading={idx < 6 ? "eager" : "lazy"}
+                          decoding={idx < 6 ? "auto" : "async"}
+                          itemProp="contentUrl"
                         />
+                        <meta itemProp="name" content={item.alt} />
+                        <meta itemProp="description" content={`${item.alt} — Manufactured by Sah Food Industries (City King Spices), Siliguri, West Bengal.`} />
                         <div className="absolute inset-0 bg-gradient-to-t from-cocoa/95 via-cocoa/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
                           <div className="self-end rounded-full bg-background/90 backdrop-blur-md p-2 text-foreground shadow-sm">
                             <ZoomIn className="size-4 text-primary" />

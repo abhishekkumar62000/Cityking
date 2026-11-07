@@ -1,5 +1,22 @@
+# Robots.txt for City King Spices (Sah Food Industries, Siliguri)
+# Official Website: https://citykingspices.in / https://cityking.in
+
 User-agent: Googlebot
 Allow: /
+Allow: /new-gallery/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /new-gallery/
+Allow: /assets/
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
 
 User-agent: Bingbot
 Allow: /
@@ -13,4 +30,6 @@ Allow: /
 User-agent: *
 Allow: /
 
+# Canonical Sitemaps
+Sitemap: https://citykingspices.in/sitemap.xml
 Sitemap: https://citykingspices.in/sitemap.xml

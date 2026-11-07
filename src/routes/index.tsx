@@ -47,6 +47,36 @@ import citykingLogo from "@/assets/Cityking Logo.png";
 import { useLanguage } from "@/context/LanguageContext";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "City King Spices | शुद्ध मसाले यानी सिटी किंग मसाले | Sah Food Industries Siliguri" },
+      {
+        name: "description",
+        content:
+          "Official Website of City King Spices (cityking.in / citykingspices.in). Manufactured by Sah Food Industries, Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling. Founded by Mukesh Kumar Sah. 100% pure cold-ground spices, everyday blended masalas, and CTC tea. Call +91 98326 53731, +91 98004 92817.",
+      },
+      {
+        name: "keywords",
+        content:
+          "cityking.in, citykingspices.in, City King, City King Spices, City King Masala, Sah Food Industries, Sah Food Industries Siliguri, Mukesh Kumar Sah, Mukesh kr Sah, Mukesh Masale, Ektiasal Eastern Bypass Road Siliguri, Jalpaiguri Darjeeling Masala Factory, Pure Haldi Powder, Red Chilli Powder, Dhaniya Powder, Jeera Powder, Sabji Masala, Chicken Masala, Meat Masala, Garam Masala, Fish Curry Masala, Kitchen King Masala, Biryani Masala, CTC Tea Siliguri, Indian Spices Manufacturer, FMCG Distributor West Bengal, Masala Dealership Bihar Bengal, शुद्ध मसाले यानी सिटी किंग मसाले, सिटी किंग मसाले सिलीगुड़ी, मुकेश कुमार साह",
+      },
+      { property: "og:title", content: "City King Spices — Sah Food Industries Siliguri (cityking.in)" },
+      {
+        property: "og:description",
+        content:
+          "100% Pure cold-ground spices, blended masalas and CTC tea manufactured by Sah Food Industries at Ektiasal Eastern Bypass Road, Siliguri. Founded by Mukesh Kumar Sah.",
+      },
+      { property: "og:url", content: "https://citykingspices.in/" },
+      { property: "og:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "City King Spices — Laye Swad me Bahar" },
+      { name: "twitter:description", content: "Authentic Indian spices manufactured by Mukesh Kumar Sah, Sah Food Industries, Siliguri." },
+      { name: "twitter:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://citykingspices.in/" },
+    ],
+  }),
   component: IndexPage,
 });
 

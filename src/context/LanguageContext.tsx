@@ -57,7 +57,7 @@ export const translations: Record<Language, Record<string, string>> = {
 
     "story.tag": "THE CITY KING STORY",
     "story.title": "Pure Spices. Authentic Taste.",
-    "story.p1": "Sah Food Industries was established at Ektiasal Eastern Bypass Road, Siliguri, Darjeeling (Pin 734001, West Bengal) by Founder Mukesh Kumar Sah (Mukesh kr Sah) with a clear vision: delivering clean, aromatic, and unadulterated spices for households that cherish authentic homemade meals.",
+    "story.p1": "Sah Food Industries was established at Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling (Pin 734001, West Bengal) by Founder Mukesh Kumar Sah (Mukesh kr Sah) with a clear vision: delivering clean, aromatic, and unadulterated spices for households that cherish authentic homemade meals.",
     "story.p2": "Every batch of City King spice is carefully ground to preserve its natural essential oils, vibrant natural colour, and inviting aroma that defines delicious everyday Indian dishes.",
     "story.readStory": "Read Full Story",
 
@@ -67,7 +67,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "b2b.btn": "Distributor Enquiry",
 
     "footer.rights": "All rights reserved. Manufactured by Sah Food Industries, Siliguri.",
-    "footer.siliguri": "Siliguri, Darjeeling District, West Bengal – 734001",
+    "footer.siliguri": "Siliguri, Dist- (Jalpaiguri) Darjeeling, West Bengal – Pin 734001",
   },
   hi: {
     // Nav
@@ -126,7 +126,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "b2b.btn": "वितरक पूछताछ फॉर्म",
 
     "footer.rights": "सर्वाधिकार सुरक्षित। निर्माता: साह फूड इंडस्ट्रीज, सिलीगुड़ी।",
-    "footer.siliguri": "सिलीगुड़ी, दार्जिलिंग जिला, पश्चिम बंगाल – 734001",
+    "footer.siliguri": "सिलीगुड़ी, जिला- (जलपाईगुड़ी) दार्जिलिंग, पश्चिम बंगाल – पिन 734001",
   },
 };
 

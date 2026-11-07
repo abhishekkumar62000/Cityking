@@ -200,7 +200,7 @@ function IndexPage() {
             <span>•</span>
             <span>शुद्ध मसाले यानी सिटी किंग मसाले</span>
             <span>•</span>
-            <span>Ektiasal Eastern Bypass Road, Siliguri, Darjeeling (734001)</span>
+            <span>Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling – Pin 734001, West Bengal</span>
             <span>•</span>
             <span>Founder: Mukesh Kumar Sah (Mukesh kr Sah)</span>
             <span>•</span>
@@ -591,7 +591,7 @@ function IndexPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-cocoa/90 via-transparent to-transparent" />
                   <div className="absolute bottom-6 left-6 right-6 text-cocoa-foreground">
                     <span className="text-xs uppercase tracking-wider text-accent font-semibold">
-                      Ektiasal Eastern Bypass Road, Siliguri
+                      Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling
                     </span>
                     <h3 className="font-display text-2xl font-bold mt-1">
                       Sah Food Industries

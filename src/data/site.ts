@@ -12,12 +12,12 @@ export const site = {
   founderShort: "Mukesh kr Sah",
   streetAddress: "Ektiasal Eastern Bypass Road",
   city: "Siliguri",
-  district: "Darjeeling",
+  district: "Dist- (Jalpaiguri) Darjeeling",
   state: "West Bengal",
   pincode: "734001",
   country: "India",
-  addressLine: "Ektiasal Eastern Bypass Road, Siliguri, Darjeeling – 734001, West Bengal",
-  fullAddress: "Sah Food Industries, Ektiasal Eastern Bypass Road, Siliguri, Darjeeling, Pin 734001, West Bengal",
+  addressLine: "Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling – Pin 734001, West Bengal",
+  fullAddress: "Sah Food Industries, Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling – Pin 734001, West Bengal",
 
   // Phone numbers
   phonePrimary: "+91 98326 53731",

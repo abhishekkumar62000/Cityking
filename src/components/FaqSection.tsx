@@ -14,12 +14,12 @@ export const faqs: FaqItem[] = [
   {
     q: "What is Sah Food Industries and what brand does it operate?",
     qHindi: "साह फूड इंडस्ट्रीज क्या है और इसका कौन सा ब्रांड है?",
-    a: "Sah Food Industries is a premier food manufacturing firm based at Ektiasal Eastern Bypass Road, Siliguri, Darjeeling (West Bengal – 734001), founded by Mukesh Kumar Sah (Mukesh kr Sah). It manufactures, grinds, and packages the premium spice brand 'City King Spices' including pure ground spices, blended masalas, and CTC tea under the motto 'Laye Swad me Bahar' (शुद्ध मसाले यानी सिटी किंग मसाले).",
+    a: "Sah Food Industries is a premier food manufacturing firm based at Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling (West Bengal – Pin 734001), founded by Mukesh Kumar Sah (Mukesh kr Sah). It manufactures, grinds, and packages the premium spice brand 'City King Spices' including pure ground spices, blended masalas, and CTC tea under the motto 'Laye Swad me Bahar' (शुद्ध मसाले यानी सिटी किंग मसाले).",
   },
   {
     q: "Where is the registered factory and office of City King Spices located?",
     qHindi: "सिटी किंग मसाले की फैक्ट्री और कार्यालय कहां स्थित है?",
-    a: "The registered manufacturing and business operations of Sah Food Industries are located at Ektiasal Eastern Bypass Road, Siliguri, Darjeeling District, Pin 734001, West Bengal. Direct dispatches are organized across North Bengal, Bihar, Assam, and pan-India transport terminals.",
+    a: "The registered manufacturing and business operations of Sah Food Industries are located at Ektiasal Eastern Bypass Road, Siliguri, Dist- (Jalpaiguri) Darjeeling – Pin 734001, West Bengal. Direct dispatches are organized across North Bengal, Bihar, Assam, and pan-India transport terminals.",
   },
   {
     q: "Are City King Spices 100% unadulterated and free of chemical food dyes?",

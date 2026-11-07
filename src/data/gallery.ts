@@ -3,10 +3,8 @@ import mirchi from "@/assets/Cityking Mirchi Powder Masala.png";
 import dhaniya from "@/assets/Cityking Dhaniya Powder Masala.png";
 import jeera from "@/assets/Cityking Jeera Powder Masala.png";
 import sabji from "@/assets/Cityking Sabji Powder Masala.png";
-import paneer from "@/assets/Cityking Kadai Paneer Powder Masala.png";
 import teaBlack from "@/assets/Cityking Premium Chai Patti CTC Tea.png";
 import teaGreen from "@/assets/Cityking Premium Chai Patti.png";
-import teaClassic from "@/assets/Cityking Chai Patti Powder Masala.png";
 import hero from "@/assets/hero-spices.jpg";
 import food from "@/assets/story-food.jpg";
 import kitchen from "@/assets/gallery-kitchen.jpg";
@@ -86,10 +84,8 @@ export const galleryItems: GalleryItem[] = [
   { id: "g3", src: dhaniya, alt: "City King Dhaniya (Coriander) Powder Official Pouch", category: "packaging" },
   { id: "g4", src: jeera, alt: "City King Jeera (Cumin) Powder Official Pouch", category: "packaging" },
   { id: "g5", src: sabji, alt: "City King Sabji Masala Blend Official Pack", category: "packaging" },
-  { id: "g6", src: paneer, alt: "City King Kadai Paneer Masala Official Pack", category: "packaging" },
   { id: "g7", src: teaBlack, alt: "City King Premium CTC Tea (Royal Black) Official Pouch", category: "packaging" },
   { id: "g8", src: teaGreen, alt: "City King Gold Premium Chai Patti Official Pack", category: "packaging" },
-  { id: "g9", src: teaClassic, alt: "City King Classic Chai Patti Heritage Pack", category: "packaging" },
 
   // Brand & Food
   { id: "g10", src: hero, alt: "Pure Indian Spices Arranged with Whole Roots and Seeds", category: "brand" },

@@ -1,11 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useMemo } from "react";
 import {
+  Check,
   ChevronLeft,
   ChevronRight,
+  Copy,
+  Download,
+  ExternalLink,
   MessageCircle,
   Search,
+  Share2,
   Sparkles,
+  Tag,
   X,
   ZoomIn,
 } from "lucide-react";
@@ -18,8 +24,32 @@ import {
   type GalleryCategory,
   type GalleryItem,
 } from "@/data/gallery";
-import { waLink } from "@/data/site";
+import { site, waLink } from "@/data/site";
 import heroImg from "@/assets/hero-spices.jpg";
+
+function getPouchBadge(alt: string): string | null {
+  if (alt.includes("₹5")) return "₹5 Pouch";
+  if (alt.includes("₹10")) return "₹10 Pouch";
+  if (alt.includes("50g")) return "50g Carton";
+  if (alt.includes("200g")) return "200g Box";
+  if (alt.includes("500g")) return "500g Bulk";
+  if (alt.includes("CTC") || alt.includes("Chai")) return "North Bengal Tea";
+  if (alt.includes("Whole")) return "Whole Spices";
+  return null;
+}
+
+const quickSearchTags = [
+  "Chicken Masala",
+  "Garam Masala",
+  "Haldi",
+  "Mirchi",
+  "Dhania",
+  "Jeera",
+  "Sabji Masala",
+  "Biryani",
+  "₹5 Pouch",
+  "₹10 Pouch",
+];
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
@@ -58,6 +88,7 @@ function GalleryPage() {
   const [activeTab, setActiveTab] = useState<GalleryCategory | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const filteredItems = useMemo(() => {
     return galleryItems.filter((item) => {
@@ -74,6 +105,14 @@ function GalleryPage() {
     selectedIndex !== null && filteredItems[selectedIndex]
       ? filteredItems[selectedIndex]
       : null;
+
+  const handleCopyLink = () => {
+    if (selectedPhoto && typeof window !== "undefined") {
+      navigator.clipboard.writeText(window.location.origin + selectedPhoto.src);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   const handlePrev = () => {
     if (selectedIndex === null) return;
@@ -157,6 +196,29 @@ function GalleryPage() {
                 )}
               </div>
 
+              {/* Quick Search Tag Chips */}
+              <div className="flex items-center justify-center gap-1.5 flex-wrap max-w-2xl text-xs">
+                <span className="text-[11px] text-muted-foreground flex items-center gap-1">
+                  <Tag className="size-3" /> Popular:
+                </span>
+                {quickSearchTags.map((tag) => (
+                  <button
+                    key={tag}
+                    onClick={() => {
+                      setSearchQuery(tag);
+                      setActiveTab("all");
+                    }}
+                    className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${
+                      searchQuery.toLowerCase() === tag.toLowerCase()
+                        ? "bg-primary text-primary-foreground font-bold shadow-xs"
+                        : "bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground border border-border/40"
+                    }`}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+
               {/* Category Filter Tabs */}
               <div className="flex items-center justify-center gap-2 flex-wrap">
                 {galleryCategories.map((cat) => {
@@ -202,6 +264,15 @@ function GalleryPage() {
                         onClick={() => setSelectedIndex(idx)}
                         className="group relative rounded-2xl overflow-hidden border border-border bg-card cursor-pointer shadow-sm hover:shadow-lift transition-all duration-300"
                       >
+                        {/* Floating Pouch Price & Packaging Tag */}
+                        {getPouchBadge(item.alt) && (
+                          <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
+                            <span className="inline-flex items-center gap-1 rounded-full bg-amber-400 text-amber-950 px-2.5 py-0.5 text-[10px] font-extrabold tracking-wide shadow-md">
+                              <Sparkles className="size-2.5 text-amber-900" />
+                              {getPouchBadge(item.alt)}
+                            </span>
+                          </div>
+                        )}
                         <img
                           src={item.src}
                           alt={item.alt}
@@ -302,20 +373,51 @@ function GalleryPage() {
 
               {/* Footer Controls & Info */}
               <div className="p-4 sm:p-5 bg-card border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div className="space-y-0.5">
-                  <span className="text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-0.5 rounded-full inline-block">
-                    {selectedPhoto.category === "masale"
-                      ? "Official Product Range"
-                      : selectedPhoto.category === "moments"
-                        ? "Company Journey"
-                        : selectedPhoto.category}
-                  </span>
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-0.5 rounded-full inline-block">
+                      {selectedPhoto.category === "masale"
+                        ? "Official Product Range"
+                        : selectedPhoto.category === "moments"
+                          ? "Company Journey"
+                          : selectedPhoto.category}
+                    </span>
+                    {getPouchBadge(selectedPhoto.alt) && (
+                      <span className="text-[11px] font-extrabold uppercase tracking-wide bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1 shadow-xs">
+                        <Sparkles className="size-2.5" />
+                        {getPouchBadge(selectedPhoto.alt)}
+                      </span>
+                    )}
+                    <span className="text-[11px] text-muted-foreground hidden md:inline">
+                      Sah Food Industries • Siliguri (734001)
+                    </span>
+                  </div>
                   <p className="text-sm sm:text-base text-foreground font-semibold">
                     {selectedPhoto.alt}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2.5 self-end sm:self-auto shrink-0">
+                <div className="flex items-center gap-2 self-end sm:self-auto shrink-0 flex-wrap">
+                  {/* Copy Link / Share Button */}
+                  <button
+                    onClick={handleCopyLink}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background hover:bg-muted text-foreground px-3 py-1.5 text-xs font-semibold transition-colors shadow-xs"
+                    title="Copy direct link to this image"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="size-3.5 text-leaf" />
+                        <span className="text-leaf">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="size-3.5" />
+                        <span>Share</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Direct WhatsApp Inquire */}
                   <a
                     href={waLink(`Hi City King, I am inquiring about this product from your gallery: ${selectedPhoto.alt}`)}
                     target="_blank"
@@ -325,7 +427,8 @@ function GalleryPage() {
                     <MessageCircle className="size-3.5" />
                     <span>Inquire on WhatsApp</span>
                   </a>
-                  <span className="text-xs text-muted-foreground whitespace-nowrap hidden sm:inline">
+
+                  <span className="text-xs text-muted-foreground whitespace-nowrap pl-1">
                     {selectedIndex! + 1} / {filteredItems.length}
                   </span>
                 </div>

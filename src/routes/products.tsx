@@ -54,6 +54,32 @@ export const Route = createFileRoute("/products")({
 
 type FilterType = "all" | "masala" | "spice-powder" | "tea";
 
+function getProductAromaTag(slug: string): string {
+  switch (slug) {
+    case "haldi":
+    case "turmeric-powder":
+      return "🌿 High Curcumin & Golden Hue";
+    case "mirchi":
+    case "red-chilli-powder":
+      return "🔥 Bold Natural Pungency";
+    case "dhaniya":
+    case "coriander-powder":
+      return "✨ Citrusy & Floral Aroma";
+    case "jeera":
+    case "cumin-powder":
+      return "🌾 Earthy Slow-Roasted Warmth";
+    case "sabji-masala":
+      return "👑 Everyday Balanced Tadka";
+    case "ctc-tea":
+    case "tea":
+      return "☕ Bold North Bengal Malty Cup";
+    case "kadai-paneer":
+      return "🍛 Royal Shahi Restaurant Flavour";
+    default:
+      return "✨ 100% Pure Cold-Ground";
+  }
+}
+
 function ProductsPage() {
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -172,14 +198,36 @@ function ProductsPage() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProducts.map((p, idx) => (
                   <Reveal key={p.id} delay={idx * 50}>
-                    <div className="group flex flex-col h-full bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/40 hover:shadow-lift transition-all duration-300">
+                    <div
+                      itemScope
+                      itemType="https://schema.org/Product"
+                      className="group flex flex-col h-full bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/40 hover:shadow-lift transition-all duration-300"
+                    >
+                      <meta itemProp="name" content={p.name} />
+                      <meta itemProp="description" content={p.description} />
+                      <meta itemProp="image" content={`https://citykingspices.in${p.image}`} />
+                      <div itemProp="brand" itemScope itemType="https://schema.org/Brand" className="hidden">
+                        <meta itemProp="name" content="City King" />
+                      </div>
+                      <div itemProp="manufacturer" itemScope itemType="https://schema.org/Organization" className="hidden">
+                        <meta itemProp="name" content="Sah Food Industries" />
+                      </div>
+
                       {/* Product Image Stage (contain fit) */}
                       <div className="relative aspect-4/3 bg-gradient-to-b from-muted/30 to-muted/80 p-6 flex items-center justify-center overflow-hidden">
+                        {/* Aroma & Sensory Tag */}
+                        <div className="absolute top-3 right-3 z-10 pointer-events-none">
+                          <span className="inline-flex items-center rounded-full bg-background/90 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-bold text-foreground border border-border/60 shadow-xs">
+                            {getProductAromaTag(p.slug)}
+                          </span>
+                        </div>
+
                         <img
                           src={p.image}
                           alt={p.name}
                           className="max-h-full w-auto max-w-full object-contain group-hover:scale-105 transition-transform duration-400"
                           loading="lazy"
+                          itemProp="image"
                         />
                         <div className="absolute top-3 left-3 flex items-center gap-2">
                           {p.hindiName && (

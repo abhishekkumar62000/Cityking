@@ -32,6 +32,7 @@ import { PurityWaterTest } from "@/components/PurityWaterTest";
 import { RegionalTadkaMatcher } from "@/components/RegionalTadkaMatcher";
 import { RegionalPresence } from "@/components/RegionalPresence";
 import { FaqSection } from "@/components/FaqSection";
+import { AiOverviewFactSheet } from "@/components/AiOverviewFactSheet";
 import { HeroProductShowcase } from "@/components/HeroProductShowcase";
 import { HeroBannerSlider } from "@/components/HeroBannerSlider";
 import { WhyChooseUsBannerSlider } from "@/components/WhyChooseUsBannerSlider";
@@ -698,7 +699,12 @@ function IndexPage() {
         </section>
 
         {/* =========================================================================
-            14. FREQUENTLY ASKED QUESTIONS & KNOWLEDGE HUB
+            14. GOOGLE AI OVERVIEW & VERIFIED FACT SHEET (KNOWLEDGE ENGINE)
+           ========================================================================= */}
+        <AiOverviewFactSheet />
+
+        {/* =========================================================================
+            15. FREQUENTLY ASKED QUESTIONS & KNOWLEDGE HUB
            ========================================================================= */}
         <FaqSection />
 

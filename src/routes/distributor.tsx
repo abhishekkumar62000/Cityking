@@ -21,23 +21,29 @@ import { site, telLink, waLink, waMessages } from "@/data/site";
 export const Route = createFileRoute("/distributor")({
   head: () => ({
     meta: [
-      { title: "Distributor & Dealership Enquiry | City King Spices | Sah Food Industries" },
+      { title: "Distributor & Dealership Enquiry | City King Spices | Sah Food Industries Siliguri | cityking.in" },
       {
         name: "description",
         content:
-          "Partner with City King Spices. Apply for dealership, stockist, or retail wholesale opportunities across West Bengal, North Bihar, and East India. Direct factory dispatch from Siliguri.",
+          "Partner with City King Spices (cityking.in). Apply for masala dealership, stockist, super stockist, and retail wholesale opportunities across West Bengal, North Bihar, and Eastern India. High margins, dedicated marketing support, and direct factory dispatch from Sah Food Industries, Ektiasal Eastern Bypass Road, Siliguri. Call +91 98326 53731, +91 98004 92817.",
       },
       {
         name: "keywords",
         content:
-          "City King Dealership, Spices Distributor Enquiry, Masala Wholesale Margin, FMCG Distributorship West Bengal Bihar, Sah Food Industries Dealership",
+          "City King Dealership, Spices Distributor Enquiry, Masala Wholesale Margin, FMCG Distributorship West Bengal, Spices Dealership Bihar, Sah Food Industries Dealership, Mukesh Kumar Sah Masala Dealership, cityking.in distributor, citykingspices.in dealership",
       },
-      { property: "og:title", content: "Dealership & Distributor Enquiry | City King Spices" },
+      { property: "og:title", content: "Dealership & Distributor Enquiry | City King Spices (cityking.in)" },
       {
         property: "og:description",
-        content: "Lucrative FMCG dealership and wholesale opportunities for City King Spices.",
+        content: "High-margin FMCG dealership and wholesale opportunities with City King Spices. Direct factory supply from Siliguri.",
       },
       { property: "og:url", content: "https://citykingspices.in/distributor" },
+      { property: "og:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "City King Spices Dealership & Distribution" },
+      { name: "twitter:description", content: "Lucrative FMCG masala distributorship direct from Sah Food Industries Siliguri." },
+      { name: "twitter:image", content: "https://citykingspices.in/City%20King%20Founder.png" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
     links: [{ rel: "canonical", href: "https://citykingspices.in/distributor" }],
   }),

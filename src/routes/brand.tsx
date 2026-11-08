@@ -20,23 +20,29 @@ import citykingLogo from "@/assets/Cityking Logo.png";
 export const Route = createFileRoute("/brand")({
   head: () => ({
     meta: [
-      { title: "Brand Philosophy & Purity Promise | City King Spices" },
+      { title: "Brand Philosophy & Purity Promise | City King Spices | Sah Food Industries | cityking.in" },
       {
         name: "description",
         content:
-          "Discover the City King brand promise — “Laye Swad me Bahar”. Zero artificial dyes, zero starch fillers, cold processing preserving natural volatile oils and authentic Indian flavor.",
+          "Discover the City King brand promise (cityking.in) — “Laye Swad me Bahar - शुद्ध मसाले यानी सिटी किंग मसाले”. Founded by Mukesh Kumar Sah at Sah Food Industries, Siliguri. Zero artificial dyes, zero starch fillers, cold milling technology preserving natural volatile oils and authentic Indian spices flavor.",
       },
       {
         name: "keywords",
         content:
-          "City King Brand, Laye Swad me Bahar, Spice Purity Standard, Cold Grinding Technology, No Artificial Colors, Authentic Indian Spices",
+          "City King Brand, Laye Swad me Bahar, Spice Purity Standard, Cold Grinding Technology, No Artificial Colors, Authentic Indian Spices, Sah Food Industries Siliguri, Mukesh Kumar Sah Vision, cityking.in, citykingspices.in, शुद्ध मसाले यानी सिटी किंग मसाले",
       },
-      { property: "og:title", content: "Brand Philosophy & Purity | City King Spices" },
+      { property: "og:title", content: "Brand Philosophy & Purity | City King Spices (cityking.in)" },
       {
         property: "og:description",
-        content: "Our commitment to unadulterated spices for every Indian kitchen.",
+        content: "Our commitment to unadulterated spices for every Indian kitchen. Sah Food Industries Siliguri.",
       },
       { property: "og:url", content: "https://citykingspices.in/brand" },
+      { property: "og:image", content: "https://citykingspices.in/Cityking%20Logo.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "City King Spices Brand Philosophy" },
+      { name: "twitter:description", content: "100% pure cold-ground spices from Sah Food Industries Siliguri." },
+      { name: "twitter:image", content: "https://citykingspices.in/Cityking%20Logo.png" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
     links: [{ rel: "canonical", href: "https://citykingspices.in/brand" }],
   }),

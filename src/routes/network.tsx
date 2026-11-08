@@ -27,23 +27,29 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/network")({
   head: () => ({
     meta: [
-      { title: "Service Network | West Bengal & 21 North Bihar Districts | City King Spices" },
+      { title: "Service Network | West Bengal & 21 North Bihar Districts | City King Spices | cityking.in" },
       {
         name: "description",
         content:
-          "City King Spices retail & distributor network across Siliguri, Darjeeling (WB) and all 21 districts of North Bihar: Muzaffarpur, Darbhanga, Champaran, Purnia, Samastipur, etc.",
+          "City King Spices (cityking.in) retail and distributor supply network across Siliguri, Dist- (Jalpaiguri) Darjeeling (WB) and 21 districts of North Bihar: Muzaffarpur, Darbhanga, Champaran, Purnia, Samastipur, Madhubani, Saharsa, Begusarai, etc. Direct factory dispatch from Sah Food Industries.",
       },
       {
         name: "keywords",
         content:
-          "City King Service Network, Masala Distributor North Bihar, Spices Siliguri Darjeeling, Kirana Supply Muzaffarpur, Darbhanga Masala Mandi, Purnia Spice Wholesale",
+          "City King Service Network, Masala Distributor North Bihar, Spices Siliguri Darjeeling, Kirana Supply Muzaffarpur, Darbhanga Masala Mandi, Purnia Spice Wholesale, Motihari Bettiah Spices, Sah Food Industries Network, cityking.in network, citykingspices.in supply",
       },
-      { property: "og:title", content: "Our Service Network | City King Spices" },
+      { property: "og:title", content: "Service & Supply Network | City King Spices (cityking.in)" },
       {
         property: "og:description",
-        content: "Serving 22 districts across West Bengal and entire North Bihar with factory-fresh spices.",
+        content: "Serving West Bengal and all 21 districts of North Bihar with fresh pure spices from Sah Food Industries Siliguri.",
       },
       { property: "og:url", content: "https://citykingspices.in/network" },
+      { property: "og:image", content: "https://citykingspices.in/hero-spices.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "City King Spices Service Network" },
+      { name: "twitter:description", content: "Direct factory distribution across West Bengal and 21 North Bihar districts." },
+      { name: "twitter:image", content: "https://citykingspices.in/hero-spices.jpg" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
     ],
     links: [{ rel: "canonical", href: "https://citykingspices.in/network" }],
   }),

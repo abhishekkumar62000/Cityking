@@ -290,11 +290,11 @@ export function AboutCityKingSection() {
 
             {/* ─── CTAs: "Explore All Products" + DIRECT LINK TO NAVBAR ABOUT SECTION ─── */}
             <Reveal>
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 pt-2">
                 {/* 1. Explore All Products */}
                 <Link
                   to="/products"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#D97706] hover:bg-[#b45309] text-white px-6 py-3 font-black text-sm tracking-wide shadow-lg shadow-amber-600/30 transition-all hover:scale-105"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-[#D97706] hover:bg-[#b45309] text-white px-6 py-3 font-black text-sm tracking-wide shadow-lg shadow-amber-600/30 transition-all hover:scale-105 active:scale-95 text-center"
                 >
                   <span>{isHi ? "सभी उत्पाद देखें" : "Explore All Products"}</span>
                   <ArrowRight className="size-4" />
@@ -303,7 +303,7 @@ export function AboutCityKingSection() {
                 {/* 2. Direct Link to Navbar About Page / Section */}
                 <Link
                   to="/about"
-                  className="inline-flex items-center gap-2 rounded-full bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 px-6 py-3 font-black text-sm tracking-wide shadow-md transition-all hover:scale-105"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-zinc-900 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 px-6 py-3 font-black text-sm tracking-wide shadow-md transition-all hover:scale-105 active:scale-95 text-center"
                   title={isHi ? "कंपनी के बारे में विस्तृत जानकारी" : "Read Full Company Heritage & Story"}
                 >
                   <Building2 className="size-4 text-amber-400 dark:text-amber-600" />
@@ -315,7 +315,7 @@ export function AboutCityKingSection() {
                   href={waLink("Hi City King, I am interested in City King Masala products.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border-2 border-zinc-800 dark:border-zinc-200 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black px-5 py-2.5 font-bold text-sm tracking-wide transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-zinc-800 dark:border-zinc-200 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black px-5 py-2.5 font-bold text-sm tracking-wide transition-all active:scale-95 text-center"
                 >
                   <MessageCircle className="size-4 text-emerald-600" />
                   <span>{isHi ? "व्हाट्सएप संपर्क" : "WhatsApp"}</span>

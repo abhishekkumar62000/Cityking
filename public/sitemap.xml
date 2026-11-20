@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://citykingspices.in/</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -28,7 +28,7 @@
   <!-- Products Page -->
   <url>
     <loc>https://citykingspices.in/products</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -71,7 +71,7 @@
   <!-- Gallery Page with ALL 33+ Product Packaging Photos, Packaging Renders and Journey Moments -->
   <url>
     <loc>https://citykingspices.in/gallery</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
     <image:image>
@@ -309,7 +309,7 @@
   <!-- About Page -->
   <url>
     <loc>https://citykingspices.in/about</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <image:image>
@@ -327,7 +327,7 @@
   <!-- Contact Us & Founder Message -->
   <url>
     <loc>https://citykingspices.in/contact</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
     <image:image>
@@ -340,7 +340,7 @@
   <!-- Service Network & Dealership -->
   <url>
     <loc>https://citykingspices.in/network</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -348,7 +348,7 @@
   <!-- Distributor Program -->
   <url>
     <loc>https://citykingspices.in/distributor</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -356,7 +356,7 @@
   <!-- Brand Heritage -->
   <url>
     <loc>https://citykingspices.in/brand</loc>
-    <lastmod>2026-11-07</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
     <image:image>

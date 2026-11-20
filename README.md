@@ -1399,17 +1399,7 @@ If any information is missing, create a clean editable data placeholder rather t
 
 The final result should look like a professionally designed Indian FMCG spice brand website ready for real customers, retailers, wholesalers and future distributors.
 
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://cityking-spice-craft.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/820ba31a-a18e-4a09-9916-827d314a8a54).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+**Official Website**: https://citykingspices.in (also https://cityking.in)
 
 ## Development
 

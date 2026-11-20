@@ -39,6 +39,7 @@ import { WhyChooseUsBannerSlider } from "@/components/WhyChooseUsBannerSlider";
 import { ServiceNetworkSection } from "@/components/ServiceNetworkSection";
 import { BestSellerSection } from "@/components/BestSellerSection";
 import { AboutCityKingSection } from "@/components/AboutCityKingSection";
+import { DottedSectionDivider } from "@/components/DottedSectionDivider";
 import { addToOrderBag } from "@/components/SmartOrderDrawer";
 
 // Image assets
@@ -248,6 +249,7 @@ function IndexPage() {
         {/* =========================================================================
             BEST SELLER PRODUCTS SECTION (KITCHEN CHOICE STYLE + BLINKIT QUICK SHOP)
            ========================================================================= */}
+        <DottedSectionDivider className="py-2" />
         <BestSellerSection />
 
         {/* =========================================================================
@@ -366,15 +368,21 @@ function IndexPage() {
           </div>
         </section>
 
+        <DottedSectionDivider className="py-2" />
+
         {/* =========================================================================
             WHY CHOOSE US ANIMATED BANNER SHOWCASE (AUTO-RUNNING 4-5 SECONDS CAROUSEL)
            ========================================================================= */}
         <WhyChooseUsBannerSlider />
 
+        <DottedSectionDivider className="py-2" />
+
         {/* =========================================================================
             3. INTERACTIVE KITCHEN GUIDE: "WHAT ARE YOU COOKING TODAY?"
            ========================================================================= */}
         <CookingGuide />
+
+        <DottedSectionDivider className="py-2" />
 
         {/* =========================================================================
             4. PRODUCT SECTION — MAJOR UPGRADE (EXPLORE OUR PRODUCTS)
@@ -480,20 +488,28 @@ function IndexPage() {
           </div>
         </section>
 
+        <DottedSectionDivider className="py-2" />
+
         {/* =========================================================================
             5. OUR SERVICE NETWORK — WEST BENGAL & ENTIRE NORTH BIHAR (22 DISTRICTS)
            ========================================================================= */}
         <ServiceNetworkSection />
+
+        <DottedSectionDivider className="py-2" />
 
         {/* =========================================================================
             6. REGIONAL TADKA & FLAVOR MATCHER (भारत का स्वाद)
            ========================================================================= */}
         <RegionalTadkaMatcher />
 
+        <DottedSectionDivider className="py-2" />
+
         {/* =========================================================================
             6. PURITY EXPLORER (THE 4 PILLARS OF CITY KING PURITY)
            ========================================================================= */}
         <PurityExplorer />
+
+        <DottedSectionDivider className="py-2" />
 
         {/* =========================================================================
             7. DIY KITCHEN SCIENCE: HOME PURITY WATER TEST
@@ -649,10 +665,14 @@ function IndexPage() {
           </div>
         </section>
 
+        <DottedSectionDivider className="py-2" />
+
         {/* =========================================================================
             12. REGIONAL PRESENCE & LOGISTICS HUB
            ========================================================================= */}
         <RegionalPresence />
+
+        <DottedSectionDivider className="py-2" />
 
         {/* =========================================================================
             13. GALLERY UPGRADE — VISUAL TEASER
@@ -710,15 +730,21 @@ function IndexPage() {
           </div>
         </section>
 
+        <DottedSectionDivider className="py-2" />
+
         {/* =========================================================================
             14. GOOGLE AI OVERVIEW & VERIFIED FACT SHEET (KNOWLEDGE ENGINE)
            ========================================================================= */}
         <AiOverviewFactSheet />
 
+        <DottedSectionDivider className="py-2" />
+
         {/* =========================================================================
             15. FREQUENTLY ASKED QUESTIONS & KNOWLEDGE HUB
            ========================================================================= */}
         <FaqSection />
+
+        <DottedSectionDivider className="py-2" />
 
         {/* =========================================================================
             15. CONTACT / B2B CALLOUT

@@ -22,6 +22,7 @@ import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
 import { products, type Product, type ProductVariant } from "@/data/products";
 import { ProductQuickViewModal } from "@/components/ProductQuickViewModal";
+import { DottedSectionDivider } from "@/components/DottedSectionDivider";
 import { useLanguage } from "@/context/LanguageContext";
 import heroImg from "@/assets/texture-spice-dark.jpg";
 
@@ -178,6 +179,8 @@ function ProductsPage() {
           </div>
         </section>
 
+        <DottedSectionDivider className="py-2" />
+
         {/* CONTROLS & CATALOG */}
         <section className="py-12 sm:py-16">
           <div className="container-page space-y-8">
@@ -262,7 +265,7 @@ function ProductsPage() {
                         <meta itemProp="image" content={`https://citykingspices.in${p.image}`} />
 
                         {/* Top Image Container */}
-                        <div className="relative p-3.5 sm:p-4 flex flex-col items-center justify-center bg-gradient-to-b from-muted/25 via-background to-background min-h-[190px] sm:min-h-[220px]">
+                        <div className="relative p-3.5 sm:p-4 flex flex-col items-center justify-center bg-gradient-to-b from-muted/25 via-background to-background h-[200px] sm:h-[230px]">
                           {/* Floating Tag */}
                           {p.tag && (
                             <span
@@ -291,13 +294,13 @@ function ProductsPage() {
                           {/* Product Image */}
                           <div
                             onClick={() => setSelectedProduct(p)}
-                            className="relative cursor-pointer w-full flex items-center justify-center py-2"
+                            className="relative cursor-pointer w-full h-full flex items-center justify-center py-2"
                           >
                             <img
                               src={p.image}
                               alt={p.name}
                               loading="lazy"
-                              className="h-32 sm:h-40 w-auto object-contain transition-transform duration-500 group-hover:scale-108 drop-shadow-md"
+                              className="h-32 sm:h-40 max-w-full object-contain transition-transform duration-500 group-hover:scale-108 drop-shadow-md"
                             />
 
                             {/* Quick View Hover Button */}
@@ -308,7 +311,7 @@ function ProductsPage() {
                                   e.stopPropagation();
                                   setSelectedProduct(p);
                                 }}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/90 hover:bg-black text-white text-xs font-bold shadow-lg backdrop-blur-xs transition-transform duration-200 hover:scale-105"
+                                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/95 hover:bg-black text-white text-xs font-black shadow-lg backdrop-blur-xs transition-transform duration-200 hover:scale-105"
                               >
                                 <Eye className="size-3.5 text-accent" />
                                 <span>Quick View</span>
@@ -322,7 +325,7 @@ function ProductsPage() {
                           <button
                             type="button"
                             onClick={() => setSelectedProduct(p)}
-                            className="w-full inline-flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-3 rounded-xl bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 text-white font-extrabold text-[11px] sm:text-xs uppercase tracking-wider shadow-xs transition-all duration-200 hover:shadow-md active:scale-98 cursor-pointer"
+                            className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-zinc-950 hover:bg-black dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 text-white font-black text-xs uppercase tracking-wider shadow-sm transition-all duration-200 hover:shadow-md active:scale-98 cursor-pointer"
                           >
                             <ShoppingBag className="size-3.5" />
                             <span>QUICK SHOP</span>
@@ -330,58 +333,58 @@ function ProductsPage() {
                         </div>
 
                         {/* Bottom Details Content */}
-                        <div className="p-3 sm:p-4 pt-2.5 flex flex-col justify-between flex-1">
+                        <div className="p-3.5 sm:p-4 pt-2.5 flex flex-col justify-between flex-1">
                           <div>
                             {/* Hindi Subtitle & Category */}
-                            <div className="flex items-center justify-between text-[11px] text-muted-foreground mb-1">
-                              <span className="font-hindi font-semibold text-primary truncate max-w-[130px]">
+                            <div className="flex items-center justify-between text-xs mb-1">
+                              <span className="font-hindi font-bold text-primary truncate max-w-[130px]">
                                 {p.hindiName}
                               </span>
-                              <div className="flex items-center gap-0.5 text-[11px] font-bold text-amber-500 shrink-0">
-                                <Star className="size-3 fill-amber-500" />
+                              <div className="flex items-center gap-0.5 text-xs font-black text-amber-500 shrink-0">
+                                <Star className="size-3.5 fill-amber-500" />
                                 <span>{p.rating || 4.9}</span>
                               </div>
                             </div>
 
-                            {/* Product Title */}
+                            {/* Product Title - BOLD DARK HIGHLIGHTED */}
                             <h3
                               onClick={() => setSelectedProduct(p)}
-                              className="font-display font-semibold text-xs sm:text-sm text-foreground line-clamp-1 hover:text-primary transition-colors cursor-pointer"
+                              className="font-bold text-sm sm:text-[15px] text-zinc-950 dark:text-zinc-50 line-clamp-1 hover:text-primary transition-colors cursor-pointer"
                               title={p.name}
                             >
                               {p.name}
                             </h3>
 
                             {/* Pack size chips snippet */}
-                            <div className="flex flex-wrap gap-1 mt-1.5 mb-2">
+                            <div className="flex flex-wrap gap-1 mt-2 mb-2">
                               {p.variants?.slice(0, 3).map((v, i) => (
                                 <span
                                   key={i}
-                                  className={`text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded border ${
+                                  className={`text-[10px] font-bold px-2 py-0.5 rounded-md border ${
                                     v.price <= 10
-                                      ? "bg-accent/15 border-accent/40 text-accent-foreground font-extrabold"
-                                      : "bg-muted/50 border-border text-muted-foreground"
+                                      ? "bg-amber-500/15 border-amber-500/40 text-amber-700 dark:text-amber-400 font-black"
+                                      : "bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300"
                                   }`}
                                 >
                                   {v.size.replace(" Box Pack", "").replace(" Fresh Pouch", "").replace(" Value Pack", "")}
                                 </span>
                               ))}
                               {p.variants && p.variants.length > 3 && (
-                                <span className="text-[9px] sm:text-[10px] text-muted-foreground px-1 py-0.5">
+                                <span className="text-[10px] font-bold text-muted-foreground px-1 py-0.5">
                                   +{p.variants.length - 3}
                                 </span>
                               )}
                             </div>
                           </div>
 
-                          {/* Price Range */}
+                          {/* Price Range - BOLD & DARK */}
                           <div className="pt-2 border-t border-border/60 flex items-baseline justify-between">
                             <div>
-                              <div className="text-[10px] text-muted-foreground font-medium">Starting from</div>
-                              <div className="font-extrabold text-sm sm:text-base text-foreground tracking-tight">
+                              <div className="text-[10px] sm:text-[11px] text-zinc-500 dark:text-zinc-400 font-bold uppercase tracking-wide">Starting from</div>
+                              <div className="font-black text-base sm:text-lg text-zinc-950 dark:text-white tracking-tight">
                                 ₹{minPrice}.00{" "}
                                 {minPrice !== maxPrice && (
-                                  <span className="text-[10px] sm:text-xs text-muted-foreground font-normal">
+                                  <span className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
                                     – ₹{maxPrice}.00
                                   </span>
                                 )}

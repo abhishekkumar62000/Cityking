@@ -46,7 +46,7 @@ import { addToOrderBag } from "@/components/SmartOrderDrawer";
 import heroSpices from "@/assets/hero-spices.jpg";
 import storyFood from "@/assets/story-food.jpg";
 import textureDark from "@/assets/texture-spice-dark.jpg";
-import citykingLogo from "@/assets/CitykingMasala Logo.png";
+import citykingLogo from "@/assets/Cityking Logo.png";
 
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -533,12 +533,12 @@ function IndexPage() {
           <div className="container-page relative z-10 max-w-4xl mx-auto space-y-6">
             <Reveal>
               <div className="flex flex-col items-center justify-center mb-3">
-                <div className="relative px-6 py-3.5 rounded-2xl bg-gradient-to-b from-accent/20 to-black/40 border border-accent/40 shadow-2xl backdrop-blur-md">
+                <div className="relative px-6 py-2.5 rounded-2xl bg-gradient-to-b from-accent/20 to-black/40 border border-accent/40 shadow-2xl backdrop-blur-md">
                   <div className="absolute inset-0 rounded-2xl bg-accent/20 blur-xl animate-pulse-glow" />
                   <img
                     src={citykingLogo}
                     alt="City King Official Logo"
-                    className="relative h-16 sm:h-20 w-auto object-contain drop-shadow-[0_10px_20px_rgba(245,158,11,0.5)] transition-transform hover:scale-105 duration-300"
+                    className="relative h-16 sm:h-20 w-auto max-w-[240px] object-contain drop-shadow-[0_10px_20px_rgba(245,158,11,0.5)] transition-transform hover:scale-105 duration-300"
                   />
                 </div>
               </div>

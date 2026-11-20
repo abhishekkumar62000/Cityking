@@ -22,7 +22,7 @@ import {
 import { site, telLink, telLink2, waLink, waMessages } from "@/data/site";
 import { Reveal } from "@/components/Reveal";
 import founderImg from "@/assets/City King Founder.png";
-import logoImg from "@/assets/CitykingMasala Logo.png";
+import logoImg from "@/assets/Cityking Logo.png";
 
 type FactTab = "company" | "founder" | "purity" | "products" | "network";
 
@@ -148,7 +148,7 @@ Manufacturing: 100% pure cold-ground spices, blended masalas (₹5, ₹10, 50g, 
                   <img
                     src={logoImg}
                     alt="City King Logo"
-                    className="size-14 object-contain rounded-2xl bg-cocoa p-1.5 shadow-sm"
+                    className="h-11 sm:h-12 w-auto max-w-[140px] object-contain rounded-xl bg-cocoa p-1.5 shadow-sm"
                   />
                   <div>
                     <h3 className="font-display text-2xl font-bold" itemProp="name">

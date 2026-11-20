@@ -37,6 +37,7 @@ import { HeroProductShowcase } from "@/components/HeroProductShowcase";
 import { HeroBannerSlider } from "@/components/HeroBannerSlider";
 import { WhyChooseUsBannerSlider } from "@/components/WhyChooseUsBannerSlider";
 import { ServiceNetworkSection } from "@/components/ServiceNetworkSection";
+import { BestSellerSection } from "@/components/BestSellerSection";
 import { addToOrderBag } from "@/components/SmartOrderDrawer";
 
 // Image assets
@@ -242,6 +243,11 @@ function IndexPage() {
             <span>Natural Volatile Oils Preserved</span>
           </div>
         </div>
+
+        {/* =========================================================================
+            BEST SELLER PRODUCTS SECTION (KITCHEN CHOICE STYLE + BLINKIT QUICK SHOP)
+           ========================================================================= */}
+        <BestSellerSection />
 
         {/* =========================================================================
             2. WHY CITY KING — 4 TRUTHFUL BRAND FEATURES

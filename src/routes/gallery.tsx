@@ -1,19 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import {
-  Check,
   ChevronLeft,
   ChevronRight,
-  Copy,
-  Download,
-  ExternalLink,
   MessageCircle,
   Search,
   Share2,
   Sparkles,
-  Tag,
   X,
   ZoomIn,
+  Check,
+  Grid3X3,
+  LayoutGrid,
+  Camera,
+  Star,
 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -24,37 +24,14 @@ import {
   type GalleryCategory,
   type GalleryItem,
 } from "@/data/gallery";
-import { site, waLink } from "@/data/site";
+import { waLink } from "@/data/site";
 import heroImg from "@/assets/hero-spices.jpg";
 
-function getPouchBadge(alt: string): string | null {
-  if (alt.includes("₹5")) return "₹5 Pouch";
-  if (alt.includes("₹10")) return "₹10 Pouch";
-  if (alt.includes("50g")) return "50g Carton";
-  if (alt.includes("200g")) return "200g Box";
-  if (alt.includes("500g")) return "500g Bulk";
-  if (alt.includes("CTC") || alt.includes("Chai")) return "North Bengal Tea";
-  if (alt.includes("Whole")) return "Whole Spices";
-  return null;
-}
-
-const quickSearchTags = [
-  "Chicken Masala",
-  "Garam Masala",
-  "Haldi",
-  "Mirchi",
-  "Dhania",
-  "Jeera",
-  "Sabji Masala",
-  "Biryani",
-  "₹5 Pouch",
-  "₹10 Pouch",
-];
-
+/* ─── SEO Meta ─────────────────────────────────────────────────────────── */
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "City King Masala Gallery — 33+ Product Photos | Sah Food Industries Siliguri | cityking.in" },
+      { title: "City King Masala Gallery – 33+ Product Photos | Sah Food Industries Siliguri | cityking.in" },
       {
         name: "description",
         content:
@@ -65,7 +42,7 @@ export const Route = createFileRoute("/gallery")({
         content:
           "City King Gallery, City King Masala Photos, City King Spices Packaging, Chicken Masala Pouch, Meat Masala Pouch, Garam Masala Pouch, Biryani Masala Pack, Fish Curry Masala, Kitchen King Masala, Kashmiri Mirch Powder, Haldi Mirchi Dhania Jeera Pouch, Mukesh Masale Photos, Sah Food Industries Siliguri Gallery, cityking.in gallery, citykingspices.in photos, Mukesh Kumar Sah Company Photos",
       },
-      { property: "og:title", content: "City King Masala Official Gallery — Sah Food Industries Siliguri" },
+      { property: "og:title", content: "City King Masala Official Gallery – Sah Food Industries Siliguri" },
       {
         property: "og:description",
         content:
@@ -84,359 +61,467 @@ export const Route = createFileRoute("/gallery")({
   component: GalleryPage,
 });
 
-function GalleryPage() {
-  const [activeTab, setActiveTab] = useState<GalleryCategory | "all">("all");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+/* ─── Helpers ───────────────────────────────────────────────────────────── */
+function getPouchBadge(alt: string): string | null {
+  if (alt.includes("₹5")) return "₹5 Pouch";
+  if (alt.includes("₹10")) return "₹10 Pouch";
+  if (alt.includes("50g")) return "50g Box";
+  if (alt.includes("200g")) return "200g Box";
+  if (alt.includes("500g")) return "500g Bulk";
+  if (alt.includes("CTC") || alt.includes("Chai")) return "North Bengal Tea";
+  if (alt.includes("Whole")) return "Whole Spices";
+  return null;
+}
+
+function categoryLabel(cat: string): string {
+  const map: Record<string, string> = {
+    masale: "City King Products",
+    moments: "Company Journey",
+    packaging: "Official Packaging",
+    brand: "Brand Heritage",
+    food: "Culinary Moments",
+  };
+  return map[cat] ?? cat;
+}
+
+/* ─── Masonry item size helper (pseudo-random but deterministic) ─────────── */
+const SIZE_MAP: ("normal" | "tall" | "wide")[] = [
+  "normal", "tall", "normal", "wide", "normal", "normal", "tall",
+  "normal", "wide", "normal", "normal", "tall", "normal", "normal",
+  "wide", "tall", "normal", "normal", "normal", "wide",
+];
+function getSize(idx: number): "normal" | "tall" | "wide" {
+  return SIZE_MAP[idx % SIZE_MAP.length];
+}
+
+/* ─── Single Gallery Card ────────────────────────────────────────────────── */
+function GalleryCard({
+  item,
+  idx,
+  viewMode,
+  onClick,
+}: {
+  item: GalleryItem;
+  idx: number;
+  viewMode: "masonry" | "grid";
+  onClick: () => void;
+}) {
+  const badge = getPouchBadge(item.alt);
+  const size = viewMode === "masonry" ? getSize(idx) : "normal";
+
+  const heightClass =
+    size === "tall"
+      ? "row-span-2 aspect-[3/4]"
+      : size === "wide"
+      ? "col-span-2 aspect-[16/9]"
+      : "aspect-square";
+
+  return (
+    <div
+      className={`group relative overflow-hidden rounded-2xl cursor-pointer shadow-md hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:-translate-y-1 ${heightClass} border border-border/50 hover:border-primary/40`}
+      onClick={onClick}
+    >
+      {/* Image */}
+      <img
+        src={item.src}
+        alt={item.alt}
+        loading="lazy"
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+
+      {/* Always-visible category chip */}
+      <div className="absolute top-3 left-3">
+        <span className="text-[9px] font-black uppercase tracking-widest bg-primary/90 text-white px-2 py-0.5 rounded-full shadow-sm">
+          {categoryLabel(item.category)}
+        </span>
+      </div>
+
+      {/* Price badge */}
+      {badge && (
+        <div className="absolute top-3 right-3">
+          <span className="text-[9px] font-black uppercase tracking-widest bg-amber-400 text-amber-950 px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+            <Star className="size-2" />
+            {badge}
+          </span>
+        </div>
+      )}
+
+      {/* Hover bottom info */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-400">
+        <p className="text-white text-xs font-semibold leading-snug line-clamp-2 drop-shadow-lg">
+          {item.alt}
+        </p>
+        <div className="mt-2 flex items-center gap-2">
+          <span className="inline-flex items-center gap-1 text-[10px] font-bold text-white/80 bg-white/20 rounded-full px-2.5 py-1 backdrop-blur-sm">
+            <ZoomIn className="size-3" />
+            Click to preview
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Lightbox Modal ─────────────────────────────────────────────────────── */
+function LightboxModal({
+  items,
+  selectedIndex,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  items: GalleryItem[];
+  selectedIndex: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
   const [copied, setCopied] = useState(false);
+  const item = items[selectedIndex];
+  if (!item) return null;
 
-  const filteredItems = useMemo(() => {
-    return galleryItems.filter((item) => {
-      const matchesTab = activeTab === "all" || item.category === activeTab;
-      const matchesSearch =
-        searchQuery.trim() === "" ||
-        item.alt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesTab && matchesSearch;
-    });
-  }, [activeTab, searchQuery]);
-
-  const selectedPhoto =
-    selectedIndex !== null && filteredItems[selectedIndex]
-      ? filteredItems[selectedIndex]
-      : null;
-
-  const handleCopyLink = () => {
-    if (selectedPhoto && typeof window !== "undefined") {
-      navigator.clipboard.writeText(window.location.origin + selectedPhoto.src);
+  const handleCopy = () => {
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(window.location.origin + item.src);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
   };
 
-  const handlePrev = () => {
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) =>
-      prev !== null && prev > 0 ? prev - 1 : filteredItems.length - 1,
-    );
-  };
-
-  const handleNext = () => {
-    if (selectedIndex === null) return;
-    setSelectedIndex((prev) =>
-      prev !== null && prev < filteredItems.length - 1 ? prev + 1 : 0,
-    );
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedIndex === null) return;
-      if (e.key === "Escape") setSelectedIndex(null);
-      if (e.key === "ArrowLeft") handlePrev();
-      if (e.key === "ArrowRight") handleNext();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedIndex, filteredItems.length]);
+  const badge = getPouchBadge(item.alt);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-accent selection:text-accent-foreground">
+    <div
+      className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in duration-200"
+      onClick={onClose}
+    >
+      {/* Inner container — stop propagation */}
+      <div
+        className="relative w-full max-w-5xl max-h-[95vh] flex flex-col rounded-3xl overflow-hidden shadow-2xl bg-zinc-900"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Top bar */}
+        <div className="flex items-center justify-between px-5 py-3.5 bg-zinc-900 border-b border-white/10">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[10px] font-black uppercase tracking-widest text-primary bg-primary/20 px-3 py-1 rounded-full">
+              {categoryLabel(item.category)}
+            </span>
+            {badge && (
+              <span className="text-[10px] font-black uppercase tracking-widest bg-amber-400 text-amber-950 px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                <Sparkles className="size-2.5" />
+                {badge}
+              </span>
+            )}
+            <span className="text-xs text-white/40 hidden sm:inline">
+              {selectedIndex + 1} / {items.length}
+            </span>
+          </div>
+          <button
+            onClick={onClose}
+            className="size-9 rounded-full bg-white/10 hover:bg-red-500/80 text-white flex items-center justify-center transition-colors"
+          >
+            <X className="size-4" />
+          </button>
+        </div>
+
+        {/* Image area */}
+        <div className="relative flex-1 bg-black flex items-center justify-center min-h-[55vh] p-3">
+          <img
+            src={item.src}
+            alt={item.alt}
+            className="max-h-[65vh] w-auto max-w-full object-contain rounded-xl shadow-2xl"
+          />
+
+          {/* Prev / Next buttons */}
+          <button
+            onClick={onPrev}
+            className="absolute left-3 top-1/2 -translate-y-1/2 size-12 rounded-full bg-black/60 hover:bg-primary text-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xl"
+          >
+            <ChevronLeft className="size-6" />
+          </button>
+          <button
+            onClick={onNext}
+            className="absolute right-3 top-1/2 -translate-y-1/2 size-12 rounded-full bg-black/60 hover:bg-primary text-white flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-xl"
+          >
+            <ChevronRight className="size-6" />
+          </button>
+        </div>
+
+        {/* Footer */}
+        <div className="px-5 py-4 bg-zinc-900 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="space-y-1 flex-1 min-w-0">
+            <p className="text-white font-bold text-sm sm:text-base leading-snug line-clamp-2 pr-4">
+              {item.alt}
+            </p>
+            <p className="text-xs text-white/40">Sah Food Industries · Siliguri 734001</p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0 flex-wrap">
+            <button
+              onClick={handleCopy}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 text-white px-4 py-2 text-xs font-semibold transition-all duration-200"
+            >
+              {copied ? (
+                <>
+                  <Check className="size-3.5 text-green-400" />
+                  <span className="text-green-400">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="size-3.5" />
+                  Share
+                </>
+              )}
+            </button>
+            <a
+              href={waLink(`Hi City King, I am interested in this product from your gallery: ${item.alt}`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 text-xs font-bold transition-all duration-200 shadow-lg"
+            >
+              <MessageCircle className="size-3.5" />
+              Inquire on WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Main Page Component ────────────────────────────────────────────────── */
+function GalleryPage() {
+  const [activeTab, setActiveTab] = useState<GalleryCategory | "all">("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [viewMode, setViewMode] = useState<"masonry" | "grid">("masonry");
+
+  const filteredItems = useMemo(() => {
+    return galleryItems.filter((item) => {
+      const matchesTab = activeTab === "all" || item.category === activeTab;
+      const q = searchQuery.trim().toLowerCase();
+      const matchesSearch =
+        q === "" ||
+        item.alt.toLowerCase().includes(q) ||
+        item.category.toLowerCase().includes(q);
+      return matchesTab && matchesSearch;
+    });
+  }, [activeTab, searchQuery]);
+
+  const handlePrev = useCallback(() => {
+    if (selectedIndex === null) return;
+    setSelectedIndex((p) => (p! <= 0 ? filteredItems.length - 1 : p! - 1));
+  }, [selectedIndex, filteredItems.length]);
+
+  const handleNext = useCallback(() => {
+    if (selectedIndex === null) return;
+    setSelectedIndex((p) => (p! >= filteredItems.length - 1 ? 0 : p! + 1));
+  }, [selectedIndex, filteredItems.length]);
+
+  // Keyboard nav
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+      if (e.key === "ArrowLeft") handlePrev();
+      if (e.key === "ArrowRight") handleNext();
+      if (e.key === "Escape") setSelectedIndex(null);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [selectedIndex, handlePrev, handleNext]);
+
+  const totalCount = filteredItems.length;
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
 
-      <main className="flex-1 pt-20">
-        {/* HERO */}
-        <section className="relative py-16 bg-cocoa text-cocoa-foreground overflow-hidden">
-          <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-            <img
-              src={heroImg}
-              alt="City King Visual Experience"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-cocoa/85" />
+      <main className="flex-1">
+        {/* ── HERO BANNER ─────────────────────────────────────────────────── */}
+        <section className="relative overflow-hidden h-56 sm:h-72 lg:h-80 flex items-center justify-center">
+          <img
+            src={heroImg}
+            alt="City King Masala Gallery — Pure Spice Collection by Sah Food Industries Siliguri"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/80" />
+          {/* Animated spice dots bg */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(12)].map((_, i) => (
+              <span
+                key={i}
+                className="absolute rounded-full bg-amber-400/20 blur-xl animate-pulse"
+                style={{
+                  width: 20 + (i * 15) % 60,
+                  height: 20 + (i * 15) % 60,
+                  top: `${(i * 37) % 90}%`,
+                  left: `${(i * 23) % 95}%`,
+                  animationDelay: `${(i * 0.4).toFixed(1)}s`,
+                  animationDuration: "3s",
+                }}
+              />
+            ))}
           </div>
 
-          <div className="container-page relative z-10 max-w-3xl mx-auto text-center space-y-4">
-            <div className="inline-flex items-center gap-2 rounded-full bg-accent/20 border border-accent/30 px-4 py-1 text-xs font-bold uppercase tracking-wider text-accent">
-              <Sparkles className="size-3.5" />
-              <span>Official Gallery</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-bold font-display leading-tight">
-              City King in Pictures
-            </h1>
-            <p className="text-cocoa-foreground/80 text-base sm:text-lg">
-              Explore our full range of official masala pouches, retail boxes, whole spices,
-              and authentic company moments from Sah Food Industries, Siliguri.
-            </p>
+          <div className="relative z-10 text-center px-4">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest bg-primary/80 backdrop-blur-sm text-white px-5 py-2 rounded-full mb-4 shadow-lg">
+                <Camera className="size-3.5" />
+                Official Photo Gallery
+              </span>
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white drop-shadow-2xl tracking-tight">
+                City King{" "}
+                <span className="bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
+                  Masala Gallery
+                </span>
+              </h1>
+              <p className="mt-3 text-white/70 text-sm sm:text-base max-w-xl mx-auto">
+                {totalCount} authentic product photos from Sah Food Industries, Siliguri — Haldi, Mirchi, Masale &amp; More
+              </p>
+            </Reveal>
           </div>
         </section>
 
-        {/* TABS, SEARCH & MASONRY GALLERY */}
-        <section className="py-12">
-          <div className="container-page space-y-8">
-            {/* Search and Category Filter Bar */}
-            <div className="flex flex-col items-center gap-4">
-              {/* Search Bar */}
-              <div className="relative w-full max-w-md">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search spices or packs (e.g. Chicken, Haldi, Biryani)..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-full border border-border bg-card text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-xs"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-muted-foreground hover:text-foreground"
-                    aria-label="Clear search"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-
-              {/* Quick Search Tag Chips */}
-              <div className="flex items-center justify-center gap-1.5 flex-wrap max-w-2xl text-xs">
-                <span className="text-[11px] text-muted-foreground flex items-center gap-1">
-                  <Tag className="size-3" /> Popular:
-                </span>
-                {quickSearchTags.map((tag) => (
-                  <button
-                    key={tag}
-                    onClick={() => {
-                      setSearchQuery(tag);
-                      setActiveTab("all");
-                    }}
-                    className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${
-                      searchQuery.toLowerCase() === tag.toLowerCase()
-                        ? "bg-primary text-primary-foreground font-bold shadow-xs"
-                        : "bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground border border-border/40"
-                    }`}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
-
-              {/* Category Filter Tabs */}
-              <div className="flex items-center justify-center gap-2 flex-wrap">
-                {galleryCategories.map((cat) => {
-                  const count =
-                    cat.id === "all"
-                      ? galleryItems.length
-                      : galleryItems.filter((i) => i.category === cat.id).length;
-                  if (count === 0 && cat.id !== "all") return null;
-
-                  const isActive = activeTab === cat.id;
-
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveTab(cat.id)}
-                      className={`px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
-                        isActive
-                          ? "bg-primary text-primary-foreground shadow-sm"
-                          : "bg-card text-muted-foreground hover:text-foreground border border-border"
-                      }`}
-                    >
-                      {cat.label} ({count})
-                    </button>
-                  );
-                })}
-              </div>
+        {/* ── STICKY FILTER BAR ────────────────────────────────────────────── */}
+        <div className="sticky top-0 z-30 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
+          <div className="container-page py-3 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            {/* Search */}
+            <div className="relative flex-1 min-w-0 w-full sm:w-auto sm:max-w-xs">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground pointer-events-none" />
+              <input
+                type="search"
+                placeholder="Search masala, chai, haldi…"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border bg-card text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+              />
             </div>
 
-            {/* Results Counter if searching */}
-            {searchQuery && (
-              <p className="text-center text-xs text-muted-foreground">
-                Showing {filteredItems.length} photos matching "{searchQuery}"
-              </p>
-            )}
-
-            {/* True Responsive Masonry Grid */}
-            {filteredItems.length > 0 ? (
-              <div className="masonry-grid" itemScope itemType="https://schema.org/ImageGallery">
-                {filteredItems.map((item, idx) => (
-                  <div key={item.id} className="masonry-item" itemScope itemType="https://schema.org/ImageObject">
-                    <Reveal delay={Math.min(idx * 20, 200)}>
-                      <div
-                        onClick={() => setSelectedIndex(idx)}
-                        className="group relative rounded-2xl overflow-hidden border border-border bg-card cursor-pointer shadow-sm hover:shadow-lift transition-all duration-300"
-                      >
-                        {/* Floating Pouch Price & Packaging Tag */}
-                        {getPouchBadge(item.alt) && (
-                          <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
-                            <span className="inline-flex items-center gap-1 rounded-full bg-amber-400 text-amber-950 px-2.5 py-0.5 text-[10px] font-extrabold tracking-wide shadow-md">
-                              <Sparkles className="size-2.5 text-amber-900" />
-                              {getPouchBadge(item.alt)}
-                            </span>
-                          </div>
-                        )}
-                        <img
-                          src={item.src}
-                          alt={item.alt}
-                          title={item.alt}
-                          className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
-                          loading={idx < 6 ? "eager" : "lazy"}
-                          decoding={idx < 6 ? "auto" : "async"}
-                          itemProp="contentUrl"
-                        />
-                        <meta itemProp="name" content={item.alt} />
-                        <meta itemProp="description" content={`${item.alt} — Manufactured by Sah Food Industries (City King Spices), Siliguri, West Bengal.`} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-cocoa/95 via-cocoa/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
-                          <div className="self-end rounded-full bg-background/90 backdrop-blur-md p-2 text-foreground shadow-sm">
-                            <ZoomIn className="size-4 text-primary" />
-                          </div>
-                          <div>
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-accent bg-accent/20 px-2 py-0.5 rounded-full inline-block">
-                              {item.category === "masale"
-                                ? "Product Range"
-                                : item.category === "moments"
-                                  ? "Journey"
-                                  : item.category}
-                            </span>
-                            <p className="text-xs sm:text-sm text-cocoa-foreground font-medium mt-1 line-clamp-2">
-                              {item.alt}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </Reveal>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-16 space-y-3">
-                <p className="text-lg font-semibold text-foreground">No photos found</p>
-                <p className="text-sm text-muted-foreground">
-                  Try clearing your search query or selecting another tab.
-                </p>
+            {/* Category tabs */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 flex-1 min-w-0">
+              {galleryCategories.map((cat) => (
                 <button
-                  onClick={() => {
-                    setSearchQuery("");
-                    setActiveTab("all");
-                  }}
-                  className="px-4 py-2 rounded-full bg-primary text-primary-foreground text-xs font-bold"
+                  key={cat.id}
+                  onClick={() => setActiveTab(cat.id as GalleryCategory | "all")}
+                  className={`shrink-0 text-xs font-bold px-3.5 py-2 rounded-full transition-all duration-200 whitespace-nowrap border ${
+                    activeTab === cat.id
+                      ? "bg-primary text-white border-primary shadow-sm shadow-primary/40"
+                      : "bg-card text-muted-foreground border-border hover:border-primary/40 hover:text-foreground"
+                  }`}
                 >
-                  Reset Filters
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Count + View toggle */}
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="text-xs font-semibold text-muted-foreground whitespace-nowrap">
+                {totalCount} photos
+              </span>
+              <div className="flex rounded-xl border border-border overflow-hidden">
+                <button
+                  onClick={() => setViewMode("masonry")}
+                  className={`p-2 transition-colors ${viewMode === "masonry" ? "bg-primary text-white" : "bg-card text-muted-foreground hover:bg-muted"}`}
+                  title="Masonry view"
+                >
+                  <LayoutGrid className="size-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={`p-2 transition-colors ${viewMode === "grid" ? "bg-primary text-white" : "bg-card text-muted-foreground hover:bg-muted"}`}
+                  title="Grid view"
+                >
+                  <Grid3X3 className="size-4" />
                 </button>
               </div>
-            )}
-          </div>
-        </section>
-
-        {/* LIGHTBOX MODAL WITH PREV / NEXT & WHATSAPP CTA */}
-        {selectedPhoto && (
-          <div
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
-            onClick={() => setSelectedIndex(null)}
-          >
-            <div
-              className="relative max-w-4xl w-full bg-card rounded-3xl overflow-hidden shadow-2xl border border-border animate-in fade-in zoom-in-95 duration-200 flex flex-col max-h-[92vh]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Close Button */}
-              <button
-                onClick={() => setSelectedIndex(null)}
-                className="absolute top-4 right-4 z-20 size-10 rounded-full bg-black/70 text-white hover:bg-black flex items-center justify-center transition-colors shadow-md"
-                aria-label="Close photo preview"
-              >
-                <X className="size-5" />
-              </button>
-
-              {/* Prev & Next Floating Buttons */}
-              <button
-                onClick={handlePrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-colors shadow-lg"
-                aria-label="Previous photo"
-              >
-                <ChevronLeft className="size-6" />
-              </button>
-
-              <button
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 size-11 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-colors shadow-lg"
-                aria-label="Next photo"
-              >
-                <ChevronRight className="size-6" />
-              </button>
-
-              {/* Image Preview Area */}
-              <div className="relative flex-1 bg-black/95 flex items-center justify-center p-2 sm:p-4 min-h-[300px] overflow-hidden">
-                <img
-                  src={selectedPhoto.src}
-                  alt={selectedPhoto.alt}
-                  className="max-h-[68vh] w-auto max-w-full object-contain rounded-lg"
-                />
-              </div>
-
-              {/* Footer Controls & Info */}
-              <div className="p-4 sm:p-5 bg-card border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-0.5 rounded-full inline-block">
-                      {selectedPhoto.category === "masale"
-                        ? "Official Product Range"
-                        : selectedPhoto.category === "moments"
-                          ? "Company Journey"
-                          : selectedPhoto.category}
-                    </span>
-                    {getPouchBadge(selectedPhoto.alt) && (
-                      <span className="text-[11px] font-extrabold uppercase tracking-wide bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1 shadow-xs">
-                        <Sparkles className="size-2.5" />
-                        {getPouchBadge(selectedPhoto.alt)}
-                      </span>
-                    )}
-                    <span className="text-[11px] text-muted-foreground hidden md:inline">
-                      Sah Food Industries • Siliguri (734001)
-                    </span>
-                  </div>
-                  <p className="text-sm sm:text-base text-foreground font-semibold">
-                    {selectedPhoto.alt}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2 self-end sm:self-auto shrink-0 flex-wrap">
-                  {/* Copy Link / Share Button */}
-                  <button
-                    onClick={handleCopyLink}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background hover:bg-muted text-foreground px-3 py-1.5 text-xs font-semibold transition-colors shadow-xs"
-                    title="Copy direct link to this image"
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="size-3.5 text-leaf" />
-                        <span className="text-leaf">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Share2 className="size-3.5" />
-                        <span>Share</span>
-                      </>
-                    )}
-                  </button>
-
-                  {/* Direct WhatsApp Inquire */}
-                  <a
-                    href={waLink(`Hi City King, I am inquiring about this product from your gallery: ${selectedPhoto.alt}`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-1.5 text-xs font-bold transition-colors shadow-xs"
-                  >
-                    <MessageCircle className="size-3.5" />
-                    <span>Inquire on WhatsApp</span>
-                  </a>
-
-                  <span className="text-xs text-muted-foreground whitespace-nowrap pl-1">
-                    {selectedIndex! + 1} / {filteredItems.length}
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
-        )}
+        </div>
+
+        {/* ── GALLERY GRID ──────────────────────────────────────────────────── */}
+        <section className="container-page py-10 pb-16">
+          {filteredItems.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-24 text-center gap-4">
+              <span className="text-5xl">🌶️</span>
+              <p className="text-lg font-bold text-foreground">No photos found</p>
+              <p className="text-sm text-muted-foreground">Try a different category or clear your search</p>
+              <button
+                onClick={() => { setActiveTab("all"); setSearchQuery(""); }}
+                className="mt-2 text-sm font-bold text-primary hover:underline"
+              >
+                Show all photos
+              </button>
+            </div>
+          ) : viewMode === "masonry" ? (
+            /* ── MASONRY GRID ── */
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 auto-rows-[200px] gap-3 sm:gap-4">
+              {filteredItems.map((item, idx) => (
+                <GalleryCard
+                  key={item.id}
+                  item={item}
+                  idx={idx}
+                  viewMode="masonry"
+                  onClick={() => setSelectedIndex(idx)}
+                />
+              ))}
+            </div>
+          ) : (
+            /* ── UNIFORM GRID ── */
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+              {filteredItems.map((item, idx) => (
+                <GalleryCard
+                  key={item.id}
+                  item={item}
+                  idx={idx}
+                  viewMode="grid"
+                  onClick={() => setSelectedIndex(idx)}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Bottom CTA */}
+          {filteredItems.length > 0 && (
+            <Reveal>
+              <div className="mt-14 text-center">
+                <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-gradient-to-r from-primary/10 via-amber-400/10 to-orange-400/10 border border-primary/20 rounded-3xl px-8 py-6 shadow-sm">
+                  <div className="text-center sm:text-left">
+                    <p className="font-black text-foreground text-lg">
+                      Want to stock City King Masala?
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Wholesale &amp; distribution enquiries welcome — Siliguri to PAN India
+                    </p>
+                  </div>
+                  <a
+                    href={waLink("Hi City King, I want to become a distributor / retailer. Please share your product catalogue and pricing.")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-amber-500 hover:from-primary/90 hover:to-amber-400 text-white font-bold px-6 py-3 shadow-lg shadow-primary/30 transition-all hover:scale-105 text-sm whitespace-nowrap"
+                  >
+                    <MessageCircle className="size-4" />
+                    Chat on WhatsApp
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          )}
+        </section>
       </main>
+
+      {/* ── LIGHTBOX ──────────────────────────────────────────────────────── */}
+      {selectedIndex !== null && (
+        <LightboxModal
+          items={filteredItems}
+          selectedIndex={selectedIndex}
+          onClose={() => setSelectedIndex(null)}
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
+      )}
 
       <Footer />
     </div>

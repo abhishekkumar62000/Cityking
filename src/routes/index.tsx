@@ -38,6 +38,7 @@ import { HeroBannerSlider } from "@/components/HeroBannerSlider";
 import { WhyChooseUsBannerSlider } from "@/components/WhyChooseUsBannerSlider";
 import { ServiceNetworkSection } from "@/components/ServiceNetworkSection";
 import { BestSellerSection } from "@/components/BestSellerSection";
+import { AboutCityKingSection } from "@/components/AboutCityKingSection";
 import { addToOrderBag } from "@/components/SmartOrderDrawer";
 
 // Image assets
@@ -248,6 +249,11 @@ function IndexPage() {
             BEST SELLER PRODUCTS SECTION (KITCHEN CHOICE STYLE + BLINKIT QUICK SHOP)
            ========================================================================= */}
         <BestSellerSection />
+
+        {/* =========================================================================
+            ABOUT CITY KING — Inserted after Best Seller, before Why City King
+           ========================================================================= */}
+        <AboutCityKingSection />
 
         {/* =========================================================================
             2. WHY CITY KING — 4 TRUTHFUL BRAND FEATURES

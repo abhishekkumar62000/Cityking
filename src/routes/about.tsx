@@ -15,7 +15,7 @@ import { site, telLink, waLink, waMessages } from "@/data/site";
 import storyFood from "@/assets/story-food.jpg";
 import kitchenImg from "@/assets/gallery-kitchen.jpg";
 import wholeSpices from "@/assets/gallery-whole-spices.jpg";
-import citykingLogo from "@/assets/Cityking Logo.png";
+import citykingLogo from "@/assets/CitykingMasala Logo.png";
 import founderImg from "@/assets/City King Founder.png";
 
 export const Route = createFileRoute("/about")({
@@ -59,11 +59,11 @@ function AboutPage() {
         <section className="relative py-20 bg-cocoa text-cocoa-foreground overflow-hidden">
           <div className="container-page relative z-10 max-w-3xl mx-auto text-center space-y-4">
             <div className="flex justify-center mb-2">
-              <div className="p-3 rounded-full bg-accent/15 border border-accent/30 backdrop-blur-md shadow-lg">
+              <div className="px-5 py-3 rounded-2xl bg-accent/15 border border-accent/30 backdrop-blur-md shadow-lg">
                 <img
                   src={citykingLogo}
                   alt="City King Official Brand Logo"
-                  className="size-20 object-contain drop-shadow-[0_8px_16px_rgba(245,158,11,0.4)]"
+                  className="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_8px_16px_rgba(245,158,11,0.4)]"
                 />
               </div>
             </div>

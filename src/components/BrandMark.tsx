@@ -1,4 +1,4 @@
-import citykingLogo from "@/assets/Cityking Logo.png";
+import citykingLogo from "@/assets/CitykingMasala Logo.png";
 import { cn } from "@/lib/utils";
 
 export function BrandMark({
@@ -12,10 +12,10 @@ export function BrandMark({
   showText?: boolean;
   size?: "sm" | "md" | "lg";
 }) {
-  const sizeMap = {
-    sm: "size-9",
-    md: "size-11",
-    lg: "size-14",
+  const heightMap = {
+    sm: "h-8 sm:h-9",
+    md: "h-9 sm:h-11",
+    lg: "h-12 sm:h-14",
   };
 
   return (
@@ -25,17 +25,17 @@ export function BrandMark({
           src={citykingLogo}
           alt="City King Official Logo - Sah Food Industries"
           className={cn(
-            sizeMap[size],
-            "object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105",
+            heightMap[size],
+            "w-auto max-w-[160px] sm:max-w-[210px] object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-105",
           )}
         />
       </span>
 
       {showText && (
-        <span className="flex flex-col leading-tight">
+        <span className="hidden sm:flex flex-col leading-tight border-l border-border/60 pl-2.5">
           <span
             className={cn(
-              "font-display text-[1.12rem] font-bold tracking-tight",
+              "font-display text-[1.05rem] font-black tracking-tight",
               tone === "light" ? "text-cocoa-foreground" : "text-foreground",
             )}
           >
@@ -43,7 +43,7 @@ export function BrandMark({
           </span>
           <span
             className={cn(
-              "text-[0.62rem] font-semibold tracking-[0.2em] uppercase",
+              "text-[0.62rem] font-bold tracking-[0.16em] uppercase",
               tone === "light" ? "text-accent" : "text-primary",
             )}
           >
@@ -54,4 +54,3 @@ export function BrandMark({
     </span>
   );
 }
-

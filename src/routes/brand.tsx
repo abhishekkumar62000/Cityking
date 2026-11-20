@@ -15,7 +15,7 @@ import { Reveal } from "@/components/Reveal";
 import { site, waLink, waMessages } from "@/data/site";
 import heroImg from "@/assets/hero-spices.jpg";
 import textureImg from "@/assets/texture-spice-dark.jpg";
-import citykingLogo from "@/assets/Cityking Logo.png";
+import citykingLogo from "@/assets/CitykingMasala Logo.png";
 
 export const Route = createFileRoute("/brand")({
   head: () => ({
@@ -59,11 +59,11 @@ function BrandPage() {
         <section className="relative py-20 bg-cocoa text-cocoa-foreground overflow-hidden">
           <div className="container-page relative z-10 max-w-3xl mx-auto text-center space-y-4">
             <div className="flex justify-center mb-2">
-              <div className="p-3 rounded-full bg-accent/15 border border-accent/30 backdrop-blur-md shadow-lg">
+              <div className="px-5 py-3 rounded-2xl bg-accent/15 border border-accent/30 backdrop-blur-md shadow-lg">
                 <img
                   src={citykingLogo}
                   alt="City King Crown Crest"
-                  className="size-20 object-contain drop-shadow-[0_8px_16px_rgba(245,158,11,0.4)]"
+                  className="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_8px_16px_rgba(245,158,11,0.4)]"
                 />
               </div>
             </div>

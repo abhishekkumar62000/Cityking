@@ -22,7 +22,7 @@ import {
 import { site, telLink, telLink2, waLink, waMessages } from "@/data/site";
 import { Reveal } from "@/components/Reveal";
 import founderImg from "@/assets/City King Founder.png";
-import logoImg from "@/assets/Cityking Logo.png";
+import logoImg from "@/assets/CitykingMasala Logo.png";
 
 type FactTab = "company" | "founder" | "purity" | "products" | "network";
 
